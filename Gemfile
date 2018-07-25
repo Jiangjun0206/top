@@ -26,6 +26,7 @@ gem 'jbuilder', '~> 2.5'
 # add bootstrap
 gem 'bootstrap-sass'
 gem 'jquery-rails'
+gem 'letter_opener', group: :development
 
 # stripe for payments
 gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
@@ -45,6 +46,13 @@ gem 'rails_12factor', group: :production
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
+
+# activeadmin for admin system
+# gem 'activeadmin', github: 'activeadmin'
+# gem 'inherited_resources', github: 'activeadmin/inherited_resources'
+
+# devise for user authentication
+gem 'devise'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
