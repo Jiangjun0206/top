@@ -25,6 +25,7 @@ gem 'jbuilder', '~> 2.5'
 
 # add bootstrap
 gem 'bootstrap-sass'
+gem 'jquery-rails'
 
 # stripe for payments
 gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'

@@ -1,33 +1,26 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Top</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, user-scalable=no">
-    <title>Top Ecommerce</title>
-   
+  <title>LearnRailsPayments</title>
     <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,300,800' >
-
+    <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-    <div id="content" class="container">
-      <header id="content-header">
-          <div id="price-container">
-            <span class="glyphicon glyphicon-tag"></span><span class="price">$9.99</span>
-          </div>
-          <%= image_tag('header-image.jpg',id:"content-head-img", alt: "Ecommerce") %>
-      </header>
-    
+  <div id="content" class="container">
+    <header id="content-header">
+        <%= image_tag('header-image.jpg', id:"content-head-img", alt: "Learn Rails!") %>
+    </header>
     <%= yield %>
-    </div>
+  </div>
+  <footer id="site-footer">
+Made by <a href="#" target="_blank">Learn App Code</a>
+</footer>
   </body>
-
-
 </html>

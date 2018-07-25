@@ -1,35 +1,48 @@
-
     <section id="content-details" class="row clearfix">
         <article id="details-article" class="col-sm-8">
-            <h1 id="article-title">Your Product <span class="font-weight-light">Product Name</span></h1>
+            <h1 id="article-title"><%= @product.title %><span class="font-weight-light"><%= @product.subtitle %></span></h1>
            
 
-            <p>Lorem ipsum dolor sit amet, in nam feugiat eleifend. Sea an possit offendit definiebas, usu cu aeque mediocritatem. Vis constituam suscipiantur ad, cum duis concludaturque no. Sea vocent consulatu at.</p>
-
-            <p>Lorem ipsum dolor sit amet, pri id tractatos torquatos, eruditi alienum eam ad. Sint graeci mel te. Ex eius corrumpit.</p>
-            <p><strong>What You Get</strong></p>
-            <ul class="no-indent">
-                <li>Lorem ipsum dolor sit.</li>
-                <li>Lorem ipsum dolor sit amet, cum.</li>
-                <li>Lorem ipsum dolor sit amet, quo ne etiam.</li>
-            </ul>
+        <%= raw @product.description %>
         </article>
         <aside id="details-aside" class="col-sm-4">
-            <a id="btn-buy" href="receipt.html" class="btn btn-success btn-lg btn-block"><span class="glyphicon glyphicon-ok"></span>Get it!</a>
+
+
+                            <%= form_tag charges_path, id:'chargeForm' do %>
+
+                    <% if flash[:error].present? %>
+                      <div id="error_explanation">
+                        <p><%= flash[:error] %></p>
+                      </div>
+                    <% end %>
+
+                  <script src="https://checkout.stripe.com/checkout.js"></script>
+                  <%= hidden_field_tag 'stripeToken' %>
+                  <%= hidden_field_tag 'amount', @product.price_in_cents %>
+                  <%= hidden_field_tag 'stripeEmail' %>
+                  <button id="btn-buy" type="button" class="btn btn-success btn-lg btn-block"><span class="glyphicon glyphicon-ok"></span>Buy this!</button>
+<script>
+    var handler = StripeCheckout.configure({
+      key: '<%= Rails.configuration.stripe[:publishable_key] %>',
+      token: function(token, arg) {
+        document.getElementById("stripeToken").value = token.id;
+        document.getElementById("stripeEmail").value = token.email;
+        document.getElementById("chargeForm").submit();
+      }
+});
+document.getElementById('btn-buy').addEventListener('click', function(e) {
+      handler.open({
+        name: 'Learn Rails',
+        description: '<%= @product.title %> ($<%= @product.price %>)',
+        amount: document.getElementById("amount").value
+    });
+    e.preventDefault();
+   })
+</script>
+<% end %>
             <ul id="details-infobox" class="list-group">
               <li class="list-group-item active clearfix">Info</li>
-              <li class="list-group-item">What You Get</li>
-              <li class="list-group-item">This Is Included</li>
+              <li class="list-group-item"><%= @product.info %></li>
             </ul>
         </aside>
     </section>
-
-<footer id="site-footer">
-Made by <a href="#" target="_blank"><p>MyongSung</p></a>
-</footer>
-
-<!-- Scripts -->
-<script src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script src="js/lib/bootstrap.min.js"></script>
-
-
